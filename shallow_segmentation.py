@@ -19,14 +19,14 @@ from skimage.filters import sobel
 def color_regions(segments, img):
 
     #take into consideration just one superpixel(segment, region etc.)
-    for current_segment in range(0, len(segments)):
+    for current_segment in range(0, len(np.unique(segments))):
         avg = [0, 0, 0]
         #find all pixels in superpixel
         pixels_in_segment = np.argwhere(segments == current_segment)
 
         #cannot divide by zero later, idk how to fix it better- some condition should be applied
-        if not pixels_in_segment.any():
-            break
+        #if not pixels_in_segment.any():
+        #    break
 
         #go through every pixel in superpixel to compute avarage colour[3 channels for rgb]
         for pixel in pixels_in_segment:
@@ -82,5 +82,5 @@ if __name__ == '__main__':
     raw_img = img_as_float(raw_img[::2, ::2])
     #tweak scale, sigma, min_size, n_clusters to achieve better results
     #http://scikit-image.org/docs/dev/api/skimage.segmentation.html#skimage.segmentation.felzenszwalb
-    segments_fz = felzenszwalb(raw_img, scale=90, sigma=0.8, min_size=15)
-    show_results(n_clusters=3)
+    segments_fz = felzenszwalb(raw_img, scale=80, sigma=0.8, min_size=20)
+    show_results(n_clusters=4)
