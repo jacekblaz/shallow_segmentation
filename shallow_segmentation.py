@@ -57,7 +57,7 @@ def kmeans(img, n_clusters):
 def show_results(n_clusters):
     print("Felzenszwalb number of segments: {}".format(len(np.unique(segments_fz))))
 
-    fig, ax = plt.subplots(3, 2, figsize=(50, 50), sharex=True, sharey=True)
+    fig, ax = plt.subplots(3, 2, figsize=(30, 30), sharex=True, sharey=True)
     ax[0, 0].imshow(raw_img)
     ax[0, 0].set_title("Original pic")
     ax[0, 1].imshow(kmeans(raw_img, n_clusters=n_clusters))
@@ -78,9 +78,9 @@ def show_results(n_clusters):
 
 
 if __name__ == '__main__':
-    raw_img = cv2.imread('raw_photo.jpg')
+    raw_img = cv2.imread('sample_pic.jpg')
     raw_img = img_as_float(raw_img[::2, ::2])
     #tweak scale, sigma, min_size, n_clusters to achieve better results
     #http://scikit-image.org/docs/dev/api/skimage.segmentation.html#skimage.segmentation.felzenszwalb
-    segments_fz = felzenszwalb(raw_img, scale=80, sigma=0.8, min_size=20)
-    show_results(n_clusters=4)
+    segments_fz = felzenszwalb(raw_img, scale=90, sigma=0.8, min_size=15)
+    show_results(n_clusters=3)
